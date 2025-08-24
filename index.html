@@ -4,266 +4,134 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dead Public Records</title>
-<meta name="theme-color" content="#0c0c0c">
 <style>
-  /* -------- PALETTE / TYPE -------- */
   :root{
-    --bg:#0c0c0c;           /* washed black */
-    --ink:#e6e6e6;          /* off-white text */
-    --muted:#9c9c9c;        /* muted grey */
-    --edge:#222;            /* borders */
-    --accent:#b51218;       /* blood red */
+    --bg:#0c0c0c; --fg:#e6e6e6; --muted:#999; --accent:#b51218;
   }
-  html,body{height:100%}
   body{
-    margin:0;
-    color:var(--ink);
-    background:
-      radial-gradient(1200px 400px at 50% -10%, rgba(181,18,24,.10), rgba(0,0,0,0)),
-      repeating-linear-gradient(0deg, #0c0c0c 0 2px, #0d0d0d 2px 4px); /* cheap “noise” */
-    font-family:"Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size:14px; line-height:1.55;
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px; line-height:1.5;
   }
-  a{color:var(--ink); text-decoration:none}
-  a:hover{color:var(--accent)}
-  .wrap{max-width:1200px; margin:0 auto; padding:18px}
+  header{border-bottom:1px solid #222; text-align:center; padding:14px 0; background:#000;}
+  header h1{margin:0;font-size:18px;letter-spacing:.2em}
+  nav a{margin:0 8px; color:var(--fg); text-decoration:none; font-size:13px}
+  nav a:hover{color:var(--accent)}
+  marquee{padding:6px 0; background:#000; color:var(--accent); font-size:12px; border-top:1px dashed #333; border-bottom:1px dashed #333}
 
-  /* -------- 90s HEADER -------- */
-  header{background:#000; border-bottom:2px solid var(--accent)}
-  .top{display:flex; align-items:center; justify-content:space-between; gap:12px}
-  .brand{letter-spacing:.15em; text-transform:uppercase; font-weight:700}
-  nav a{padding:6px 8px; border:1px solid transparent}
-  nav a:hover{border-color:var(--edge); background:#111}
-  marquee{padding:6px 0; border-top:1px dashed var(--edge); border-bottom:1px dashed var(--edge); color:var(--accent); font-weight:700}
+  section{padding:30px 20px; max-width:1200px; margin:0 auto}
+  h2{text-transform:uppercase; font-size:15px; letter-spacing:.15em; margin-bottom:20px}
 
-  /* -------- SECTIONS -------- */
-  section{padding:26px 0; border-bottom:1px dashed var(--edge)}
-  h2{margin:0 0 12px; font-size:16px; text-transform:uppercase; letter-spacing:.18em}
-  .fine{color:var(--muted); font-size:13px}
-
-  /* -------- HERO -------- */
-  .hero{
-    padding:70px 0 54px;
-    background:
-      radial-gradient(700px 220px at 50% -20%, rgba(181,18,24,.10), rgba(0,0,0,0));
-    text-align:center;
+  /* grid for shop/archive */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:24px; justify-items:center}
+  .item img{
+    width:100%; height:auto; background:#111;
+    display:block;
+    filter:grayscale(100%) contrast(120%) brightness(95%);
+    transition:filter .3s;
   }
-  .hero h1{margin:0 0 6px; font-size:28px; letter-spacing:.25em}
-  .buttons{display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
-  .btn{display:inline-block; padding:10px 14px; border:1px solid var(--edge); background:#0f0f0f; border-radius:8px}
-  .btn.primary{background:var(--accent); color:#fff; border-color:transparent}
+  .item img:hover{filter:grayscale(0%) contrast(100%) brightness(100%)}
+  .label{margin-top:8px; font-size:12px; letter-spacing:.1em; text-align:center}
 
-  /* -------- SHOP GRID (modern bones) -------- */
-  .grid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px}
-  @media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:640px){ .grid{grid-template-columns:1fr} }
+  /* archive dead effect */
+  .dead img{opacity:.4; filter:grayscale(100%) blur(1px)}
+  .dead .label{text-decoration:line-through; color:var(--muted)}
 
-  .card{border:1px solid var(--edge); background:linear-gradient(180deg,#101010,#0b0b0b); border-radius:12px; overflow:hidden}
-  .card .img{aspect-ratio:4/5; background:#111 center/cover no-repeat; position:relative}
-  /* self-contained placeholder “photo” with label */
-  .ph{background-image:
-      linear-gradient(135deg, #121212 0 50%, #0d0d0d 50% 100%);
+  /* forms */
+  form{max-width:500px; margin:0 auto}
+  input,textarea{
+    width:100%; margin:6px 0; padding:10px;
+    background:#111; border:1px solid #333; color:var(--fg);
+    font-family:inherit; font-size:13px
   }
-  .ph::after{
-    content:"PHOTO"; position:absolute; left:8px; bottom:8px;
-    color:#666; font-size:11px; background:#0008; padding:2px 6px; border:1px solid #333
+  button{
+    margin-top:8px; padding:10px 16px;
+    background:var(--accent); border:none; color:#fff;
+    text-transform:uppercase; letter-spacing:.1em; cursor:pointer
   }
-  .body{padding:12px}
-  .code{font-weight:700}
-  .meta{display:flex; justify-content:space-between; color:var(--muted)}
-  .price{color:#fff}
-  .cta{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
-  .tag{padding:6px 8px; border:1px solid var(--edge); border-radius:8px; background:#0f0f0f}
-  .buy{background:var(--accent); color:#fff; border-color:transparent}
+  button:hover{background:#900}
 
-  /* -------- PRODUCT DETAIL (Rick-ish layout) -------- */
-  .product{display:grid; grid-template-columns: 1.1fr .9fr; gap:20px}
-  @media (max-width:900px){ .product{grid-template-columns:1fr} }
-  .big{border:1px solid var(--edge); background:#111; aspect-ratio:4/5; position:relative}
-  .big.ph::after{content:"LARGE PHOTO"; left:10px; bottom:10px}
-  .panel{position:relative; border:1px solid var(--edge); background:#0f0f0f; border-radius:10px; padding:14px}
-  .panel h3{margin:0 0 8px; font-size:16px; letter-spacing:.18em}
-  .sizes{display:flex; gap:6px; flex-wrap:wrap}
-  .sizes button{
-    padding:8px 10px; border:1px solid var(--edge); background:#111; color:var(--ink); border-radius:7px; cursor:pointer
-  }
-  .sizes button:hover{border-color:var(--accent); color:#fff}
-  .primary{display:inline-block; margin-top:10px; padding:10px 14px; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:8px}
-  .ghost{display:inline-block; margin-left:8px; padding:10px 14px; border:1px solid var(--edge); background:#111; border-radius:8px}
-  .stamp{display:inline-block; margin-top:10px; color:#777; text-decoration:line-through; border:1px dashed #444; padding:8px 10px; border-radius:8px}
-
-  /* -------- SIMPLE ROUTER FEEL -------- */
-  .hidden{display:none}
-  .back{margin-top:12px; display:inline-block; color:var(--muted); text-decoration:underline}
-
-  /* -------- FOOTER -------- */
-  footer{background:#000; border-top:2px solid var(--accent); color:#7c7c7c; padding:12px 0}
+  footer{text-align:center; padding:14px; border-top:1px solid #222; font-size:12px; color:var(--muted); background:#000}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap top">
-    <div class="brand">DEAD PUBLIC RECORDS</div>
-    <nav>
-      <a href="#shop">SHOP</a>
-      <a href="#archive">ARCHIVE</a>
-      <a href="#about">ABOUT</a>
-    </nav>
-  </div>
-  <marquee behavior="scroll" direction="left">ONCE GONE, IT’S DEAD • BRITISH PUNK MINIMALISM • HIGH‑HEAT PLASTISOL • BIRMINGHAM, UK</marquee>
+  <h1>DEAD PUBLIC RECORDS</h1>
+  <nav>
+    <a href="#shop">Shop</a>
+    <a href="#archive">Archive</a>
+    <a href="#about">About</a>
+    <a href="#community">Community</a>
+  </nav>
 </header>
 
-<!-- -------- HOME / HERO -------- -->
-<section class="hero">
-  <div class="wrap">
-    <h1>DEAD PUBLIC RECORDS</h1>
-    <p class="fine">Archive of bootlegs & accidents. Each drop is small. Once gone, it’s dead.</p>
-    <div class="buttons">
-      <a class="btn primary" href="#shop">View Latest Drop</a>
-      <a class="btn" href="#archive">Browse Archive</a>
-    </div>
-  </div>
-</section>
+<marquee>ONCE GONE, IT'S DEAD — DEAD PUBLIC RECORDS — BRITISH PUNK MINIMALISM — HIGH HEAT PLASTISOL</marquee>
 
-<!-- -------- SHOP (GRID) -------- -->
-<section id="shop" class="wrap">
-  <h2>Latest Drop</h2>
-  <p class="fine" style="margin:-6px 0 12px">Merch grid bones; zine soul. Grey out “dead” items. Live items link to product detail below.</p>
-
+<section id="shop">
+  <h2>Shop</h2>
   <div class="grid">
-    <!-- CARD 1 (LIVE) -->
-    <article class="card">
-      <a href="#dpr001"><div class="img ph"></div></a>
-      <div class="body">
-        <div class="code">DPR‑001 / Godflesh Study</div>
-        <div class="meta"><span>Heavy Cotton Tee</span><span class="price">£155</span></div>
-        <div class="cta">
-          <a class="tag buy" href="#dpr001">View</a>
-          <span class="tag">Boxy / Thick Neck</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- CARD 2 (LIVE) -->
-    <article class="card">
-      <a href="#dpr002"><div class="img ph"></div></a>
-      <div class="body">
-        <div class="code">DPR‑002 / Psychick Youth</div>
-        <div class="meta"><span>Limited Hand‑Pull</span><span class="price">£175</span></div>
-        <div class="cta">
-          <a class="tag buy" href="#dpr002">View</a>
-          <span class="tag">Sim Process</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- CARD 3 (DEAD) -->
-    <article class="card" aria-disabled="true">
-      <div class="img ph"></div>
-      <div class="body">
-        <div class="code">DPR‑000 / Test Print</div>
-        <div class="meta"><span>Prototype</span><span>—</span></div>
-        <div class="cta">
-          <span class="tag">Uneven Pull</span>
-          <span class="tag" style="text-decoration:line-through;color:#777">DEAD</span>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- -------- PRODUCT DETAIL: DPR‑001 -------- -->
-<section id="dpr001" class="wrap hidden">
-  <h2>DPR‑001 / Godflesh Study</h2>
-  <div class="product">
-    <div class="big ph"></div>
-    <div class="panel">
-      <h3>Godflesh Study — £155</h3>
-      <p class="fine">Plastisol bleed on deadstock blank. Pulled in Birmingham, Summer ’25. Edition of 30.</p>
-      <div class="sizes">
-        <button>S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button>
-      </div>
-      <!-- REPLACE href WITH YOUR STRIPE PAYMENT LINK -->
-      <a class="primary" href="https://buy.stripe.com/test_replace_me" target="_blank" rel="noopener">Buy via Stripe</a>
-      <a class="ghost" href="#shop">Size Guide</a>
-      <p class="fine" style="margin-top:12px">Logo treated as spot color. Thick laydown. Vintage‑crack potential after wash/wear.</p>
-      <a class="back" href="#shop">← Back to Shop</a>
+    <div class="item">
+      <a href="#"><img src="images/product-001.jpg" alt="DPR-001"></a>
+      <div class="label">DPR-001 / Godflesh Study</div>
+    </div>
+    <div class="item">
+      <a href="#"><img src="images/product-002.jpg" alt="DPR-002"></a>
+      <div class="label">DPR-002 / Psychick Youth</div>
+    </div>
+    <div class="item dead">
+      <a href="#"><img src="images/product-000.jpg" alt="DPR-000"></a>
+      <div class="label">DPR-000 / Test Print</div>
     </div>
   </div>
 </section>
 
-<!-- -------- PRODUCT DETAIL: DPR‑002 -------- -->
-<section id="dpr002" class="wrap hidden">
-  <h2>DPR‑002 / Psychick Youth</h2>
-  <div class="product">
-    <div class="big ph"></div>
-    <div class="panel">
-      <h3>Psychick Youth — £175</h3>
-      <p class="fine">Simulated process on black. Grit intact. Run of 25. For the faithful only.</p>
-      <div class="sizes">
-        <button>S</button><button>M</button><button>L</button><button>XL</button><button>XXL</button>
-      </div>
-      <!-- REPLACE href WITH YOUR STRIPE PAYMENT LINK -->
-      <a class="primary" href="https://buy.stripe.com/test_replace_me" target="_blank" rel="noopener">Buy via Stripe</a>
-      <a class="ghost" href="#shop">Size Guide</a>
-      <p class="fine" style="margin-top:12px">Low‑res JPEG soul, no halftone dots. Hand‑pulled. Each shirt slightly off; that’s the point.</p>
-      <a class="back" href="#shop">← Back to Shop</a>
-    </div>
-  </div>
-</section>
-
-<!-- -------- ARCHIVE -------- -->
-<section id="archive" class="wrap">
+<section id="archive">
   <h2>Archive</h2>
-  <p class="fine" style="margin:-6px 0 12px">Museum wall. No purchase. Codes, dates, places.</p>
-  <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:8px">
-    <div class="big ph" style="aspect-ratio:1/1"></div>
-    <div class="big ph" style="aspect-ratio:1/1"></div>
-    <div class="big ph" style="aspect-ratio:1/1"></div>
-    <div class="big ph" style="aspect-ratio:1/1"></div>
-    <div class="big ph" style="aspect-ratio:1/1"></div>
-    <div class="big ph" style="aspect-ratio:1/1"></div>
+  <div class="grid">
+    <div class="item dead"><img src="images/archive-1.jpg"><div class="label">DPR-003 / Summer ’24</div></div>
+    <div class="item dead"><img src="images/archive-2.jpg"><div class="label">DPR-004 / Winter ’23</div></div>
+    <div class="item dead"><img src="images/archive-3.jpg"><div class="label">DPR-005 / Demo Pull</div></div>
   </div>
 </section>
 
-<!-- -------- ABOUT -------- -->
-<section id="about" class="wrap">
-  <h2>About / Contact</h2>
-  <p class="fine" style="max-width:760px">
-    British punk minimalism + high‑heat plastisol. No perfect edges. No trend cycles. Just the work.
-    Dead Public Records is a study of ink, memory, and myth.
+<section id="about">
+  <h2>About</h2>
+  <p>
+    Dead Public Records is a study of ink, memory, and myth.  
+    No perfect edges. No trend cycles. Just the work.  
+    <br><br>
+    Contact:<br>
+    <a href="mailto:studio@deadpublicrecords.com">studio@deadpublicrecords.com</a><br>
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
   </p>
-  <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
-    <a class="btn" href="mailto:studio@deadpublicrecords.com">studio@deadpublicrecords.com</a>
-    <a class="btn" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-    <a class="btn" href="#" onclick="alert('Swap this with your Buttondown/Mailchimp embed.'); return false;">Join the Dead List</a>
-  </div>
+</section>
+
+<section id="community">
+  <h2>Community</h2>
+  <p class="fine">Suggestion box — contribute ideas, thoughts, or upload scans to the archive.</p>
+  
+  <form action="https://formspree.io/f/xqazabcd" method="POST">
+    <input type="text" name="name" placeholder="Name">
+    <input type="email" name="_replyto" placeholder="Email">
+    <textarea name="message" rows="4" placeholder="Your suggestion..."></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <br><br>
+  <form action="https://formspree.io/f/xqazabcd" method="POST" enctype="multipart/form-data">
+    <input type="file" name="upload">
+    <button type="submit">Upload Scan</button>
+  </form>
+  <p class="fine">*Uploads are emailed to you for review. Swap the form endpoint with your own (Formspree/Netlify Forms).</p>
 </section>
 
 <footer>
-  <div class="wrap">© <span id="y"></span> Dead Public Records — Birmingham, UK</div>
+  © <span id="y"></span> Dead Public Records — Birmingham, UK
 </footer>
 
 <script>
-  // Year
   document.getElementById('y').textContent = new Date().getFullYear();
-
-  // Tiny “router”: show product detail sections when hash matches
-  function route(){
-    const ids = ['dpr001','dpr002'];
-    ids.forEach(id=>{
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.classList.toggle('hidden', location.hash !== '#'+id);
-    });
-    // If navigating back to #shop or no hash, hide details
-    if (!['#dpr001','#dpr002'].includes(location.hash)) {
-      ids.forEach(id=>{ const el = document.getElementById(id); if(el) el.classList.add('hidden'); });
-    }
-  }
-  window.addEventListener('hashchange', route);
-  route();
 </script>
 </body>
 </html>
