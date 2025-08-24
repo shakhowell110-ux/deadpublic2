@@ -6,50 +6,35 @@
 <title>Dead Public Records</title>
 <style>
   :root{
-    --bg:#0c0c0c; --fg:#e6e6e6; --muted:#999; --accent:#b51218;
+    --bg:#111; --fg:#e6e6e6; --muted:#888; --accent:#b51218;
   }
   body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font-family:Arial, Helvetica, sans-serif;
+    margin:0; background:#111 url('https://i.ibb.co/Nm0hH9r/concrete-texture.jpg') repeat center center;
+    color:var(--fg); font-family:Arial, Helvetica, sans-serif;
     font-size:14px; line-height:1.5;
+    background-size:cover;
   }
-  header{border-bottom:1px solid #222; text-align:center; padding:14px 0; background:#000;}
-  header h1{margin:0;font-size:18px;letter-spacing:.2em}
-  nav a{margin:0 8px; color:var(--fg); text-decoration:none; font-size:13px}
+  header{padding:14px 0; background:#000; text-align:center; border-bottom:1px solid #222;}
+  header h1{margin:0; font-size:18px; letter-spacing:.2em}
+  nav a{margin:0 10px; color:var(--fg); text-decoration:none; font-size:13px}
   nav a:hover{color:var(--accent)}
   marquee{padding:6px 0; background:#000; color:var(--accent); font-size:12px; border-top:1px dashed #333; border-bottom:1px dashed #333}
 
   section{padding:30px 20px; max-width:1200px; margin:0 auto}
   h2{text-transform:uppercase; font-size:15px; letter-spacing:.15em; margin-bottom:20px}
 
-  /* grid for shop/archive */
-  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:24px; justify-items:center}
-  .item img{
-    width:100%; height:auto; background:#111;
-    display:block;
-    filter:grayscale(100%) contrast(120%) brightness(95%);
-    transition:filter .3s;
+  /* product grid */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:28px; justify-items:center}
+  .item{text-align:center}
+  .item img{width:100%; display:block; background:#000; transition:opacity .3s}
+  .item img:hover{opacity:.85}
+  .label{margin-top:8px; font-size:12px; letter-spacing:.1em}
+  .sizes{margin-top:6px; display:flex; gap:4px; justify-content:center; flex-wrap:wrap}
+  .sizes span{
+    padding:4px 6px; border:1px solid #444; font-size:11px;
+    color:var(--fg); min-width:28px; text-align:center;
   }
-  .item img:hover{filter:grayscale(0%) contrast(100%) brightness(100%)}
-  .label{margin-top:8px; font-size:12px; letter-spacing:.1em; text-align:center}
-
-  /* archive dead effect */
-  .dead img{opacity:.4; filter:grayscale(100%) blur(1px)}
-  .dead .label{text-decoration:line-through; color:var(--muted)}
-
-  /* forms */
-  form{max-width:500px; margin:0 auto}
-  input,textarea{
-    width:100%; margin:6px 0; padding:10px;
-    background:#111; border:1px solid #333; color:var(--fg);
-    font-family:inherit; font-size:13px
-  }
-  button{
-    margin-top:8px; padding:10px 16px;
-    background:var(--accent); border:none; color:#fff;
-    text-transform:uppercase; letter-spacing:.1em; cursor:pointer
-  }
-  button:hover{background:#900}
+  .soldout span{color:var(--muted); text-decoration:line-through}
 
   footer{text-align:center; padding:14px; border-top:1px solid #222; font-size:12px; color:var(--muted); background:#000}
 </style>
@@ -66,7 +51,7 @@
   </nav>
 </header>
 
-<marquee>ONCE GONE, IT'S DEAD — DEAD PUBLIC RECORDS — BRITISH PUNK MINIMALISM — HIGH HEAT PLASTISOL</marquee>
+<marquee>ONCE GONE, IT'S DEAD — DEAD PUBLIC RECORDS — BRUTALIST WEB CONCRETE — BIRMINGHAM, UK</marquee>
 
 <section id="shop">
   <h2>Shop</h2>
@@ -74,14 +59,17 @@
     <div class="item">
       <a href="#"><img src="images/product-001.jpg" alt="DPR-001"></a>
       <div class="label">DPR-001 / Godflesh Study</div>
+      <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
     </div>
     <div class="item">
       <a href="#"><img src="images/product-002.jpg" alt="DPR-002"></a>
       <div class="label">DPR-002 / Psychick Youth</div>
+      <div class="sizes"><span>S</span><span>M</span><span>L</span><span>XL</span><span>XXL</span></div>
     </div>
-    <div class="item dead">
+    <div class="item soldout">
       <a href="#"><img src="images/product-000.jpg" alt="DPR-000"></a>
       <div class="label">DPR-000 / Test Print</div>
+      <div class="sizes"><span>S</span><span>M</span><span>L</span></div>
     </div>
   </div>
 </section>
@@ -89,18 +77,24 @@
 <section id="archive">
   <h2>Archive</h2>
   <div class="grid">
-    <div class="item dead"><img src="images/archive-1.jpg"><div class="label">DPR-003 / Summer ’24</div></div>
-    <div class="item dead"><img src="images/archive-2.jpg"><div class="label">DPR-004 / Winter ’23</div></div>
-    <div class="item dead"><img src="images/archive-3.jpg"><div class="label">DPR-005 / Demo Pull</div></div>
+    <div class="item soldout">
+      <img src="images/archive-1.jpg" alt="archive">
+      <div class="label">DPR-003 / Summer ’24</div>
+    </div>
+    <div class="item soldout">
+      <img src="images/archive-2.jpg" alt="archive">
+      <div class="label">DPR-004 / Winter ’23</div>
+    </div>
   </div>
 </section>
 
 <section id="about">
   <h2>About</h2>
   <p>
-    Dead Public Records is a study of ink, memory, and myth.  
-    No perfect edges. No trend cycles. Just the work.  
-    <br><br>
+    Dead Public Records is a study of ink, memory, and myth.<br>
+    No perfect edges. No trend cycles. Just the work.
+  </p>
+  <p>
     Contact:<br>
     <a href="mailto:studio@deadpublicrecords.com">studio@deadpublicrecords.com</a><br>
     <a href="https://instagram.com/" target="_blank">Instagram</a>
@@ -109,21 +103,12 @@
 
 <section id="community">
   <h2>Community</h2>
-  <p class="fine">Suggestion box — contribute ideas, thoughts, or upload scans to the archive.</p>
-  
+  <p>Suggestion box — contribute ideas, thoughts, or upload scans.</p>
   <form action="https://formspree.io/f/xqazabcd" method="POST">
-    <input type="text" name="name" placeholder="Name">
-    <input type="email" name="_replyto" placeholder="Email">
-    <textarea name="message" rows="4" placeholder="Your suggestion..."></textarea>
-    <button type="submit">Send</button>
+    <input type="text" name="name" placeholder="Name" style="width:100%;margin:5px 0;padding:8px;background:#111;border:1px solid #333;color:#e6e6e6">
+    <textarea name="message" rows="4" placeholder="Your suggestion..." style="width:100%;margin:5px 0;padding:8px;background:#111;border:1px solid #333;color:#e6e6e6"></textarea>
+    <button type="submit" style="padding:10px 14px;background:#b51218;color:#fff;border:none;cursor:pointer">Send</button>
   </form>
-
-  <br><br>
-  <form action="https://formspree.io/f/xqazabcd" method="POST" enctype="multipart/form-data">
-    <input type="file" name="upload">
-    <button type="submit">Upload Scan</button>
-  </form>
-  <p class="fine">*Uploads are emailed to you for review. Swap the form endpoint with your own (Formspree/Netlify Forms).</p>
 </section>
 
 <footer>
@@ -133,5 +118,6 @@
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 </script>
+
 </body>
 </html>
