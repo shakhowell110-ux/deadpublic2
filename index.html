@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dead Public Records</title>
+  <meta name="description" content="Dead Public Records — archive of bootlegs & accidents. Once gone, it's dead." />
+  <meta name="theme-color" content="#000000" />
+  <style>
+    :root{ --bg:#0a0a0a; --fg:#e6e6e6; --muted:#aaaaaa; --edge:#1b1b1b; --accent:#b80f16; }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:var(--fg);text-decoration:none} a:hover{color:var(--accent)}
+    .wrap{max-width:1080px;margin:0 auto;padding:20px}
+    header{position:sticky;top:0;z-index:10;background:rgba(10,10,10,.9);backdrop-filter:blur(4px);border-bottom:1px solid var(--edge)}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+    .menu{display:flex;gap:8px;flex-wrap:wrap}
+    .menu a{padding:10px 12px;border-radius:10px;border:1px solid transparent}
+    .menu a.active,.menu a:hover{border-color:var(--edge)}
+    section{padding:34px 0;border-bottom:1px solid var(--edge)}
+    h1,h2{letter-spacing:.02em;margin:0}
+    h2{text-transform:uppercase;font-size:clamp(16px,2.2vw,20px);letter-spacing:.1em;margin-bottom:12px}
+    .hero{display:grid;place-items:center;padding:90px 0;border-bottom:1px solid var(--edge);
+      background: radial-gradient(800px 260px at 50% -10%, rgba(184,15,22,.12), rgba(0,0,0,0));}
+    .hero h1{font-size:clamp(28px,6vw,64px);text-transform:uppercase;margin-bottom:6px}
+    .hero p{color:var(--muted);margin:4px 0 0}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--edge);background:#111;border-radius:10px;cursor:pointer}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    .card{border:1px solid var(--edge);border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#101010,#0d0d0d)}
+    .card .img{aspect-ratio:4/3;background:#111 center/cover no-repeat;border-bottom:1px solid var(--edge)}
+    .card .body{padding:12px}
+    .meta{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+    .sticker{display:inline-block;padding:8px 10px;border:1px solid var(--edge);border-radius:10px;background:#111}
+    .sticker.buy{background:var(--accent);color:#fff;border-color:transparent}
+    .sticker.dead{opacity:.55;text-decoration:line-through}
+    .gallery{display:grid;gap:8px;grid-template-columns:repeat(6,1fr)}
+    @media (max-width:900px){.gallery{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}}
+    .thumb{aspect-ratio:1/1;border:1px solid var(--edge);border-radius:8px;background:#111 center/cover no-repeat}
+    .fine{color:var(--muted);font-size:13px}
+    footer{border-top:1px solid var(--edge);color:var(--muted)}
+    /* simple “placeholder image” backgrounds */
+    .ph1{background-image:linear-gradient(135deg,#141414 0 50%,#111 50% 100%)}
+    .ph2{background-image:linear-gradient(135deg,#111 0 50%,#141414 50% 100%)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">Dead Public Records</div>
+      <nav class="menu">
+        <a href="#home" class="active">Home</a>
+        <a href="#shop">Shop / Drop</a>
+        <a href="#archive">Archive</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <main id="home">
+    <section class="hero">
+      <div class="wrap" style="text-align:center">
+        <h1>DEAD PUBLIC RECORDS</h1>
+        <p>Archive of bootlegs & accidents. Once gone, it’s dead.</p>
+        <div class="row" style="justify-content:center;margin-top:12px">
+          <a class="btn primary" href="#shop">View Latest Drop</a>
+          <a class="btn" href="#archive">Browse Archive</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP / DROP -->
+    <section id="shop" class="wrap">
+      <h2>Latest Drop</h2>
+      <p class="fine" style="margin:-6px 0 14px">Merch grid, flipped: grainy images, catalog codes, liner‑note captions. Replace Stripe links.</p>
+      <div class="grid">
+        <article class="card">
+          <div class="img ph1"></div>
+          <div class="body">
+            <div style="font-weight:600">DPR‑001 / Godflesh Study</div>
+            <div class="meta"><span>Heavy Cotton Tee</span><span>£155</span></div>
+            <div class="row" style="margin-top:8px">
+              <!-- REPLACE the href with your Stripe Payment Link -->
+              <a class="sticker buy" href="https://buy.stripe.com/test_replace_me" target="_blank" rel="noopener">Buy (Stripe)</a>
+              <span class="sticker">Size Guide</span>
+            </div>
+            <p class="fine" style="margin:8px 0 0">Plastisol bleed on deadstock blank. Pulled in Birmingham, Summer ’25. Run of 30.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="img ph2"></div>
+          <div class="body">
+            <div style="font-weight:600">DPR‑002 / Psychick Youth</div>
+            <div class="meta"><span>Limited Hand‑Pull</span><span>£175</span></div>
+            <div class="row" style="margin-top:8px">
+              <a class="sticker buy" href="https://buy.stripe.com/test_replace_me" target="_blank" rel="noopener">Buy (Stripe)</a>
+            </div>
+            <p class="fine" style="margin:8px 0 0">Sim process on black. Grit intact. 25 units.</p>
+          </div>
+        </article>
+
+        <!-- Archived item shown inside shop -->
+        <article class="card" aria-disabled="true">
+          <div class="img ph1"></div>
+          <div class="body">
+            <div style="font-weight:600">DPR‑000 / Test Print</div>
+            <div class="meta"><span>Prototype</span><span>—</span></div>
+            <div class="row" style="margin-top:8px"><span class="sticker dead">DEAD</span></div>
+            <p class="fine" style="margin:8px 0 0">Filed to archive. Uneven pull, perfect character.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ARCHIVE -->
+    <section id="archive" class="wrap">
+      <h2>Archive</h2>
+      <p class="fine" style="margin:-6px 0 14px">Museum wall of past work. Black/white, halftone energy. No buy links — only codes, dates, places.</p>
+      <div class="gallery">
+        <div class="thumb ph1" title="DPR‑003 / Summer ’25"></div>
+        <div class="thumb ph2" title="DPR‑004 / Spring ’25"></div>
+        <div class="thumb ph1" title="DPR‑005 / Winter ’24"></div>
+        <div class="thumb ph2" title="DPR‑006 / Demo Pull"></div>
+        <div class="thumb ph1" title="DPR‑007 / One‑Pass"></div>
+        <div class="thumb ph2" title="DPR‑008 / Collage"></div>
+        <div class="thumb ph1" title="DPR‑009 / Study"></div>
+        <div class="thumb ph2" title="DPR‑010 / Proof"></div>
+        <div class="thumb ph1" title="DPR‑011 / Variant"></div>
+        <div class="thumb ph2" title="DPR‑012 / Field Note"></div>
+        <div class="thumb ph1" title="DPR‑013 / Field Note"></div>
+        <div class="thumb ph2" title="DPR‑014 / Field Note"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="wrap">
+      <h2>About / Contact</h2>
+      <p class="fine" style="max-width:760px">
+        British punk minimalism + high‑heat plastisol. No perfect edges. No trend cycles. Just the work.
+        Dead Public Records is a study of ink, memory, and myth.
+      </p>
+      <div class="row" style="margin-top:10px">
+        <a class="sticker" href="mailto:studio@deadpublicrecords.com">studio@deadpublicrecords.com</a>
+        <a class="sticker" href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a class="sticker" href="#" onclick="alert('Swap this with your Buttondown/Mailchimp embed.');return false;">Join the Dead List</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding:14px 0">
+      <span class="fine">© <span id="y"></span> Dead Public Records</span>
+      <span class="fine">Birmingham, UK</span>
+    </div>
+  </footer>
+
+  <script>
+    // Year + simple nav highlighting
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const links = [...document.querySelectorAll('.menu a')];
+    function setActive(){
+      const hash = location.hash || '#home';
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href')===hash));
+    }
+    window.addEventListener('hashchange', setActive); setActive();
+  </script>
+</body>
+</html>
